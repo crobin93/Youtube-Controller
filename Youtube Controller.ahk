@@ -17,14 +17,16 @@ DetectHiddenWindows, On
 ; Ensures a consistent starting directory
 SetWorkingDir %A_ScriptDir%
 
-; sets title matching to search for "containing" isntead of "exact"
+; sets title matching to search for "containing" instead of "exact"
 SetTitleMatchMode, 2
 
 ;sets controlID to 0 every time the script is reloaded
 controlID       := 0
 
 
-; This is the main script that will accept a key to be pressed via its parameter
+;======================== Google Chrome Function ========================
+
+; This is the main function of the script that will accept a key to be pressed via its parameter
 RunScript(KeyPress)
 {
     ; Gets the control ID of google chrome
@@ -44,7 +46,7 @@ RunScript(KeyPress)
     ; Sends ctrl+1 to your browser to set it at tab 1
     ControlSend, Chrome_RenderWidgetHostHWND1, ^1, Google Chrome
 
-    ; Starts loop to find youtube tab
+    ; Starts loop to find a tab with "Youtube" in the name
     Loop
     {
         IfWinExist, YouTube
@@ -54,7 +56,7 @@ RunScript(KeyPress)
         ;Scrolls through the tabs.
         ControlSend, ,{Control Down}{Tab}, Google Chrome
 
-        ; if the script acts weird and is starts tabbing through page, add "Sleep, 50" to line above this
+        ; if the script acts weird and starts tabbing through page, add "Sleep, 50" to line above this
         ; Sleep, is measures in milliseconds. 1000 ms = 1 sec
     }
 
@@ -71,7 +73,7 @@ return
 ctrl & space::
     RunScript("k")
     ; Sends the K button to chrome
-    ; K is the dedicated pause/unpause hotkey for YouTube (People think space is. Don't use space!
+    ; K is the dedicated pause/un-pause hotkey for YouTube (People think space is. Don't use space!
     ; Space will scroll you down the youtube page when the player doesn't have focus.
 return
 
