@@ -24,53 +24,89 @@ SetTitleMatchMode, 2
 controlID       := 0
 
 
-;======================== Google Chrome Function ========================
 
-; This is the main function of the script that will accept a key to be pressed via its parameter
-RunScript(KeyPress)
+
+;======================== Google Chrome Functions ========================
+
+
+SelectChrome()
 {
     ; Gets the control ID of google chrome
     ControlGet, controlID, Hwnd,,Chrome_RenderWidgetHostHWND1, Google Chrome
 
     ; Focuses on chrome without breaking focus on what you're doing
     ControlFocus,,ahk_id %controlID%
+}
 
-    ; Checks to make sure YouTube isn't the first tab before starting the loop
-    ; Saves time when youtube is the tab it's on
-    IfWinExist, YouTube
-    {
-        ControlSend, Chrome_RenderWidgetHostHWND1, {%KeyPress%}, Google Chrome
-        return
-    }
 
+YoutubeFinder()
+{
     ; Sends ctrl+1 to your browser to set it at tab 1
     ControlSend, Chrome_RenderWidgetHostHWND1, ^1, Google Chrome
 
     ; Starts loop to find a tab with "Youtube" in the name
     Loop
     {
-        IfWinExist, YouTube
+        IfWinExist, - YouTube -
         {ControlSend, ,{Control Up}, Google Chrome
             break
         }
         ;Scrolls through the tabs.
         ControlSend, ,{Control Down}{Tab}, Google Chrome
 
-        ; if the script acts weird and starts tabbing through page, add "Sleep, 50" to line above this
+        Sleep, 5
+        ; if the script starts tabbing through page or misses the right tab, increase the number after "Sleep"
         ; Sleep, is measures in milliseconds. 1000 ms = 1 sec
     }
+}
 
-    ; Sleep, 50
-    ; Uncomment Sleep line above if keystrokes are not registered
+
+
+;======================== Main Hotkey Functions ========================
+
+; This is the main function of the script that will accept a key to be pressed via its parameter
+;Multi-key Presses seem to only work when stored in variable with different syntax as shown below
+; AHK has limited support with nested functions so some repetitive actions have been written out by hand here.
+
+
+RunScript(KeyPress)
+{
+    SelectChrome()
+
+    IfWinExist, - YouTube -
+    {
+        ControlSend, Chrome_RenderWidgetHostHWND1, {%KeyPress%}, Google Chrome
+        return
+    }
+
+    YoutubeFinder()
 
     ControlSend, Chrome_RenderWidgetHostHWND1, {%KeyPress%}, Google Chrome
 }
 
-return
+
+RunScriptMulti(KeyPress)
+{
+    SelectChrome()
+
+    IfWinExist, - YouTube -
+    {
+        ControlSend, Chrome_RenderWidgetHostHWND1, %KeyPress%, Google Chrome
+        return
+    }
+
+    YoutubeFinder()
+
+    ControlSend, Chrome_RenderWidgetHostHWND1, %KeyPress%, Google Chrome
+}
+
+
+
+
 ;============================== Pause ==============================
 #IfWinNotActive, ahk_exe chrome.exe
 
-ctrl & space::
+^space::
     RunScript("k")
     ; Sends the K button to chrome
     ; K is the dedicated pause/un-pause hotkey for YouTube (People think space is. Don't use space!
@@ -81,7 +117,7 @@ return
 
 ;============================ Rewind ===============================
 
-alt & Left::
+!Left::
     RunScript("Left")
 return
 
@@ -89,7 +125,7 @@ return
 
 ;============================ Fast Forward ===============================
 
-alt & Right::
+!Right::
     RunScript("Right")
 return
 
@@ -97,7 +133,7 @@ return
 
 ;============================ Fullscreen ===============================
 
-alt & f::
+!f::
     RunScript("f")
 return
 
@@ -105,7 +141,7 @@ return
 
 ;============================ Volume Up ===============================
 
-alt & =::
+!=::
     RunScript("Up")
 return
 
@@ -113,10 +149,36 @@ return
 
 ;============================ Volume Down ===============================
 
-alt & -::
+!-::
     RunScript("Down")
 return
 
+
+
+;============================ Next Video ===============================
+
+^+!Right::
+    RunScriptMulti("+N")
+return
+
+
+
+;============================ Previous Video ===============================
+
+^+!Left::
+    ;This specific key combination [Alt + Left] doesn't work without separating arrow keys into their own curly brackets
+    SelectChrome()
+
+    IfWinExist, - YouTube -
+    {
+        ControlSend, Chrome_RenderWidgetHostHWND1, !{Left}, Google Chrome
+        return
+    }
+
+    YoutubeFinder()
+
+    ControlSend, Chrome_RenderWidgetHostHWND1, !{Left}, Google Chrome
+return
 
 
 #IfWinNotActive
