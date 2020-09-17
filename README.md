@@ -1,5 +1,5 @@
 # <ins>Youtube Controller</ins>
-This is a program that allows you to control YouTube videos in Google Chrome even when you are using other programs.
+This is a program that allows you to control YouTube videos in Google Chrome when the window is not selected or you are using other programs.
 
 ### <ins>Installation</ins>
 
@@ -11,7 +11,7 @@ This is a program that allows you to control YouTube videos in Google Chrome eve
 
 Youtube Controller will be always be continuously running in the background. You can pause or exit the program by accessing the icon in your **system tray** on the lower right corner of your screen.
 
-**Pause**: `Ctrl + Space`
+**Pause / Play**: `Ctrl + Space`
 
 **Rewind**: `Alt + Left-Arrow`
 
