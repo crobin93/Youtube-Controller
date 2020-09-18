@@ -34,6 +34,7 @@ Youtube Controller will be always be continuously running in the background. You
 ### <ins>Troubleshooting</ins>
 - Should work perfectly well even with multiple Chrome **tabs** open. If you have multiple actual **windows** of Chrome open, the Chrome window with the Youtube video needs to have been selected more recently than the other Chrome windows without the Youtube video.  
 - If you have more than one Youtube tab open, place the tab you want to control to the left of the others. The program will automatically select that tab if another Youtube tab isn't already selected.
+- Currently does not work if you are trying to switch **from** another Chrome window. This will be worked on in future versions.
 - ~~If there is another tab with the word "Youtube" in the title, the program will run on that tab. To fix this, move your Youtube video to the **left** of that tab.~~  
 *(Fixed in version 1.1)*
 
