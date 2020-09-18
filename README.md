@@ -3,8 +3,8 @@ This is a program that allows you to control YouTube videos in Google Chrome whe
 
 ### <ins>Installation</ins>
 
-1. Download and install `YoutubeControllerSetup.exe`.  
-2. If the program is not already running in your system tray, Run `YoutubeController.exe` from the start menu.
+1. Download and install `Youtube Controller Setup v1.1.exe`.  
+2. If the program is not already running in your system tray, Run `Youtube Controller 1.1.exe` from the start menu.
 3. Enjoy :]
 
 ### <ins>Controls</ins>
