@@ -1,4 +1,7 @@
-# <ins>Youtube Controller</ins>
+# This repository is no longer supported.
+## Please use [youtube-anywhere-remote](https://github.com/crobin93/youtube-anywhere-remote)
+
+# ~~<ins>Youtube Controller</ins>~~
 This is a program that allows you to control YouTube videos in Google Chrome when the window is not selected or you are using other programs.
 
 ### <ins>Installation</ins>
